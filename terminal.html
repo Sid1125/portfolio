@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal - Siddharth Sinha</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .terminal-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+            margin-right: 20px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .close { background: #ff5f56; }
+        .minimize { background: #ffbd2e; }
+        .maximize { background: #27c93f; }
+
+        .terminal-title {
+            color: #fff;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .terminal-body {
+            height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .terminal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .terminal-body::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        .terminal-line {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .prompt {
+            color: #00ff00;
+        }
+
+        .command {
+            color: #fff;
+        }
+
+        .output {
+            color: #00ff00;
+            margin-left: 20px;
+        }
+
+        .input-line {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        #terminal-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        #terminal-input:focus {
+            outline: none;
+        }
+
+        .error {
+            color: #ff5f56;
+        }
+
+        .help-text {
+            color: #ffbd2e;
+        }
+
+        .nav-back {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-back:hover {
+            transform: translateX(-5px);
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-back">
+        <i data-lucide="arrow-left"></i>
+        Back to Portfolio
+    </a>
+
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-button close"></div>
+                <div class="terminal-button minimize"></div>
+                <div class="terminal-button maximize"></div>
+            </div>
+            <div class="terminal-title">sid@portfolio ~ </div>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+            <div class="terminal-line">
+                <span class="help-text">Welcome to Siddharth's Terminal! Type 'help' for available commands.</span>
+            </div>
+        </div>
+        <div class="input-line">
+            <span class="prompt">$ </span>
+            <input type="text" id="terminal-input" autofocus>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+        
+        const terminalBody = document.getElementById('terminal-body');
+        const input = document.getElementById('terminal-input');
+        
+        function addLine(content, className = '') {
+            const line = document.createElement('div');
+            line.className = `terminal-line ${className}`;
+            content.split('\n').forEach(text => {
+                const textLine = document.createElement('div');
+                textLine.textContent = text;
+                line.appendChild(textLine);
+            });
+            terminalBody.appendChild(line);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        const commands = {
+            help: {
+                description: 'Show available commands',
+                execute: () => 
+`Available commands:
+help - Show this help message
+about - About me
+skills - My technical skills
+contact - Contact information
+projects - View my projects
+clear - Clear the terminal
+education - My educational background
+certifications - View my certifications
+socials - My social media links
+date - Show current date and time
+whoami - Who am I?`
+            },
+            about: {
+                description: 'About me',
+                execute: () => 
+`Hi! I'm Siddharth Sinha, a 2nd Year B.Tech CSE student at Amity University Gurugram.
+I'm passionate about web development and aspiring to become a Full Stack Developer.
+Currently exploring and learning modern web technologies while building projects.`
+            },
+            skills: {
+                description: 'My technical skills',
+                execute: () => 
+`Technical Skills:
+Frontend: HTML5, CSS3, JavaScript, React.js, Bootstrap, Tailwind CSS
+Backend: Node.js, Express.js, RESTful APIs
+Databases: MongoDB, MySQL
+Tools: Git, GitHub, VS Code
+Cloud: Google Cloud, Cloud Computing, Generative AI`
+            },
+            contact: {
+                description: 'Contact information',
+                execute: () => 
+`Email: siddharthsinha1125@gmail.com
+Location: New Delhi, India`
+            },
+            projects: {
+                description: 'View my projects',
+                execute: () => 
+`Recent Projects:
+1. Library Management System (Python, MySQL)
+2. Dr FUSED (Discord.js, MongoDB)
+3. TinDog (HTML, CSS, Bootstrap)
+4. Prodigy Infotech Tasks (Web Development)`
+            },
+            clear: {
+                description: 'Clear the terminal',
+                execute: () => {
+                    terminalBody.innerHTML = '';
+                    return '';
+                }
+            },
+            education: {
+                description: 'My educational background',
+                execute: () => 
+`Education:
+- B.Tech in Computer Science & Engineering (2023-2027)
+  Amity University Gurugram
+- Higher Secondary Education (2021-2023)
+  Science Stream`
+            },
+            certifications: {
+                description: 'View my certifications',
+                execute: () => 
+`Certifications:
+1. Google Cloud Computing & Generative AI
+2. freeCodeCamp Responsive Web Design
+3. freeCodeCamp JavaScript Algorithms & Data Structures
+4. Web Development Internship - Prodigy Infotech`
+            },
+            socials: {
+                description: 'My social media links',
+                execute: () => 
+`Social Media:
+GitHub: https://github.com/sid1125
+LinkedIn: https://www.linkedin.com/in/siddharth-sinha-8b9a1b1b2/`
+            },
+            date: {
+                description: 'Show current date and time',
+                execute: () => new Date().toLocaleString()
+            },
+            whoami: {
+                description: 'Who am I?',
+                execute: () => 'sid@portfolio'
+            }
+        };
+
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const command = input.value.trim().toLowerCase();
+                addLine(`$ ${command}`, 'command');
+                
+                if (command in commands) {
+                    const output = commands[command].execute();
+                    if (output) {
+                        addLine(output, 'output');
+                    }
+                } else if (command !== '') {
+                    addLine(`Command not found: ${command}. Type 'help' for available commands.`, 'error');
+                }
+                
+                input.value = '';
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }
+        });
+
+        // Focus input when clicking anywhere in terminal
+        document.querySelector('.terminal-container').addEventListener('click', () => {
+            input.focus();
+        });
+    </script>
+</body>
+</html> 

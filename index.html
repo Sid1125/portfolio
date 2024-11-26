@@ -732,6 +732,145 @@
         .achievement-link:hover::after {
             transform: translateX(3px);
         }
+
+        .certifications-section {
+            padding: 80px 0;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .certification-card {
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        [data-theme="dark"] .certification-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .certification-logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            object-fit: contain;
+        }
+
+        .certification-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .certification-issuer {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .skills-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-category {
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        [data-theme="dark"] .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .category-title {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: rgba(0, 122, 255, 0.1);
+            color: var(--accent-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .ongoing-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        .ongoing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .special-link {
+            position: relative;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: rgba(var(--accent-color-rgb), 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .special-link:hover {
+            background: rgba(var(--accent-color-rgb), 0.2);
+            transform: translateY(-2px);
+        }
+
+        .blink {
+            animation: blink 1s step-end infinite;
+            opacity: 1;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -743,6 +882,8 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="terminal.html" class="special-link">Terminal <span class="blink">_</span></a></li>
+                <li><a href="blog.html" class="special-link">Blog</a></li>
                 <li>
                     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                         <i data-lucide="sun" class="icon" id="theme-icon"></i>
@@ -762,7 +903,7 @@
                 </div>
                 <div class="hero-content fade-in">
                     <h2>Hi, I'm <span class="gradient-text typing-text">Siddharth</span></h2>
-                    <p class="hero-text">A passionate Full Stack Developer having an experience of building Web applications with JavaScript / React.js / Node.js and some other cool libraries and frameworks.</p>
+                    <p class="hero-text">A 2nd Year B.Tech CSE student at Amity University Gurugram, passionate about web development and aspiring to become a Full Stack Developer. Currently exploring and learning modern web technologies while building projects.</p>
                     <div class="hero-buttons">
                         <button class="btn primary-btn" onclick="scrollToProjects()">
                             View My Work
@@ -776,7 +917,7 @@
                             <a href="https://github.com/sid1125" target="_blank" class="icon-btn">
                                 <i data-lucide="github" class="icon"></i>
                             </a>
-                            <a href="https://www.linkedin.com/in/ssinha1125/" target="_blank" class="icon-btn">
+                            <a href="https://www.linkedin.com/in/siddharth-sinha-8b9a1b1b2/" target="_blank" class="icon-btn">
                                 <i data-lucide="linkedin" class="icon"></i>
                             </a>
                             <a href="mailto:siddharthsinha1125@gmail.com" class="icon-btn">
@@ -878,98 +1019,111 @@
 
         <section id="skills">
             <div class="container">
-                <br>
-                <br>
-                <h2 class="section-title fade-in">Skills & Technologies</h2>
-                <div class="skills-grid">
-                    <div class="skill-card fade-in">
-                        <h3>HTML</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="90"></div>
+                <h2 class="section-title fade-in">Technical Skills</h2>
+                <div class="skills-categories">
+                    <div class="skill-category fade-in">
+                        <h3 class="category-title">
+                            <i data-lucide="layout" class="icon"></i>
+                            Frontend
+                        </h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Bootstrap</span>
+                            <span class="skill-tag">Tailwind CSS</span>
                         </div>
-                        <p class="skill-level">90%</p>
                     </div>
-                    <div class="skill-card fade-in">
-                        <h3>CSS</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="85"></div>
+
+                    <div class="skill-category fade-in">
+                        <h3 class="category-title">
+                            <i data-lucide="server" class="icon"></i>
+                            Backend
+                        </h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Express.js</span>
+                            <span class="skill-tag">RESTful APIs</span>
                         </div>
-                        <p class="skill-level">85%</p>
                     </div>
-                    <div class="skill-card fade-in">
-                        <h3>JavaScript</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="75"></div>
+
+                    <div class="skill-category fade-in">
+                        <h3 class="category-title">
+                            <i data-lucide="database" class="icon"></i>
+                            Databases
+                        </h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">MySQL</span>
                         </div>
-                        <p class="skill-level">75%</p>
                     </div>
-                    <div class="skill-card fade-in">
-                        <h3>React</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="35"></div>
+
+                    <div class="skill-category fade-in">
+                        <h3 class="category-title">
+                            <i data-lucide="git-branch" class="icon"></i>
+                            Tools & Version Control
+                        </h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">VS Code</span>
                         </div>
-                        <p class="skill-level">35%</p>
                     </div>
-                    <div class="skill-card fade-in">
-                        <h3>Node.js</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="60"></div>
+
+                    <div class="skill-category fade-in">
+                        <h3 class="category-title">
+                            <i data-lucide="cloud" class="icon"></i>
+                            Cloud Technologies
+                        </h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">Google Cloud</span>
+                            <span class="skill-tag">Cloud Computing</span>
+                            <span class="skill-tag">Generative AI</span>
                         </div>
-                        <p class="skill-level">60%</p>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3>Express.js</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="45"></div>
-                        </div>
-                        <p class="skill-level">45%</p>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3>MongoDB</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="55"></div>
-                        </div>
-                        <p class="skill-level">55%</p>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3>Bootstrap</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="80"></div>
-                        </div>
-                        <p class="skill-level">80%</p>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3>Git</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="70"></div>
-                        </div>
-                        <p class="skill-level">70%</p>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3>TypeScript</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="40"></div>
-                        </div>
-                        <p class="skill-level">40%</p>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3>Next.js</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="50"></div>
-                        </div>
-                        <p class="skill-level">50%</p>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3>Tailwind CSS</h3>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-level="30"></div>
-                        </div>
-                        <p class="skill-level">30%</p>
                     </div>
                 </div>
             </div>
         </section>
-<br>
+
+        <section id="achievements" class="achievements-section">
+            <div class="container">
+                <h2 class="section-title fade-in">Certifications & Achievements</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-card fade-in">
+                        <i data-lucide="cloud" class="achievement-icon"></i>
+                        <h3 class="achievement-title">Google Cloud Computing & Generative AI</h3>
+                        <p class="achievement-description">Completed comprehensive training in Google Cloud fundamentals and Generative AI through Google Developers Groups at Amity University Gurugram.</p>
+                        <a href="@1707194419743.jpg" target="_blank" class="achievement-link">View Certificate</a>
+                        <span class="achievement-date">Feb 2024</span>
+                    </div>
+
+                    <div class="achievement-card fade-in">
+                        <i data-lucide="layout" class="achievement-icon"></i>
+                        <h3 class="achievement-title">Responsive Web Design</h3>
+                        <p class="achievement-description">Earned freeCodeCamp's certification in responsive web design, mastering HTML5, CSS3, and modern design principles.</p>
+                        <a href="https://www.freecodecamp.org/certification/SiddharthS1125/responsive-web-design" target="_blank" class="achievement-link">View Certificate</a>
+                        <span class="achievement-date">2024</span>
+                    </div>
+
+                    <div class="achievement-card fade-in">
+                        <i data-lucide="code" class="achievement-icon"></i>
+                        <h3 class="achievement-title">JavaScript Algorithms & Data Structures</h3>
+                        <p class="achievement-description">Completed freeCodeCamp's JavaScript certification, demonstrating proficiency in algorithms and data structures.</p>
+                        <a href="https://www.freecodecamp.org/certification/SiddharthS1125/javascript-algorithms-and-data-structures-v8" target="_blank" class="achievement-link">View Certificate</a>
+                        <span class="achievement-date">2024</span>
+                    </div>
+
+                    <div class="achievement-card fade-in">
+                        <i data-lucide="code-2" class="achievement-icon"></i>
+                        <h3 class="achievement-title">Web Development Internship</h3>
+                        <p class="achievement-description">Successfully completed web development internship at Prodigy Infotech, working on various frontend projects.</p>
+                        <a href="Certificate.pdf" target="_blank" class="achievement-link">View Certificate</a>
+                        <span class="achievement-date">2024</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="experience">
             <div class="container">
@@ -980,15 +1134,23 @@
                     <div class="timeline-item fade-in">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
+                            <h3>Web Development Intern</h3>
+                            <h4>Prodigy Infotech</h4>
+                            <p class="timeline-date">Sept'24 - Oct'24</p>
+                            <p>Working on various web development projects using modern technologies and frameworks.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
                             <h3>Bachelor of Technology</h3>
                             <h4>Computer Science & Engineering</h4>
                             <p class="timeline-date">2023 - 2027</p>
                             <p>Pursuing B.Tech in Computer Science with focus on software development and web technologies.</p>
-                            
-                            <div class="sub-experience">
-                                <h4>Web Development Intern</h4>
-                                <p class="timeline-date">Sept'2024 - Oct'2024</p>
-                                <p>Working on various web development projects at Prodigy Infotech using modern technologies and frameworks.</p>
+                            <div class="ongoing-indicator">
+                                <span class="ongoing-dot"></span>
+                                Currently Pursuing
                             </div>
                         </div>
                     </div>
@@ -999,47 +1161,8 @@
                             <h3>Higher Secondary Education</h3>
                             <h4>Science Stream</h4>
                             <p class="timeline-date">2021 - 2023</p>
-                            <p>Completed higher secondary education with focus on Physics, Chemistry, and Mathematics.</p>
+                            <p>Completed higher secondary education with focus on Physics, Chemistry, and Mathematics with Computer Science as a Subject.</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="achievements" class="achievements-section">
-            <div class="container">
-                <h2 class="section-title fade-in">Achievements</h2>
-                <div class="achievements-grid">
-                    <div class="achievement-card fade-in">
-                        <i data-lucide="trophy" class="achievement-icon"></i>
-                        <h3 class="achievement-title">Web Development Internship</h3>
-                        <p class="achievement-description">Successfully completed multiple web development projects during internship at Prodigy Infotech, demonstrating proficiency in modern web technologies.</p>
-                        <a href="Certificate.pdf" target="_blank" class="achievement-link">View Certificate</a>
-                        <span class="achievement-date">2024</span>
-                    </div>
-
-                    <div class="achievement-card fade-in">
-                        <i data-lucide="layout" class="achievement-icon"></i>
-                        <h3 class="achievement-title">Responsive Web Design Certification</h3>
-                        <p class="achievement-description">Completed freeCodeCamp's Responsive Web Design certification, mastering HTML5, CSS3, and responsive design principles.</p>
-                        <a href="https://www.freecodecamp.org/certification/SiddharthS1125/responsive-web-design" target="_blank" class="achievement-link">View Certificate</a>
-                        <span class="achievement-date">2024</span>
-                    </div>
-
-                    <div class="achievement-card fade-in">
-                        <i data-lucide="code-2" class="achievement-icon"></i>
-                        <h3 class="achievement-title">JavaScript Algorithms & Data Structures</h3>
-                        <p class="achievement-description">Earned freeCodeCamp's JavaScript certification, demonstrating proficiency in algorithms, data structures, and modern JavaScript.</p>
-                        <a href="https://www.freecodecamp.org/certification/SiddharthS1125/javascript-algorithms-and-data-structures-v8" target="_blank" class="achievement-link">View Certificate</a>
-                        <span class="achievement-date">2024</span>
-                    </div>
-
-                    <div class="achievement-card fade-in">
-                        <i data-lucide="cloud" class="achievement-icon"></i>
-                        <h3 class="achievement-title">Google Cloud Computing & Generative AI</h3>
-                        <p class="achievement-description">Completed comprehensive training in Google Cloud fundamentals and Generative AI through Google Developers Groups at Amity University Gurugram.</p>
-                        <a href="1707194419743.jpg" target="_blank" class="achievement-link">View Certificate</a>
-                        <span class="achievement-date">Feb 2024</span>
                     </div>
                 </div>
             </div>
@@ -1134,7 +1257,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>About Me</h3>
-                    <p>A passionate Full Stack Developer focused on creating interactive and user-friendly applications. Always eager to learn and explore new technologies.</p>
+                    <p>A Computer Science Engineering student with a strong interest in web development. Currently learning and building projects with modern technologies while pursuing my B.Tech degree.</p>
                 </div>
                 
                 <div class="footer-section">

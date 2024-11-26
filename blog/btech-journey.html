@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Journey of a B.Tech Student - Blog</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        nav {
+            background: rgba(var(--accent-color-rgb), 0.1);
+            padding: 15px 30px;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(var(--accent-color-rgb), 0.1);
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            background: rgba(var(--accent-color-rgb), 0.1);
+        }
+
+        nav a.active {
+            background: var(--accent-color);
+            color: white;
+            opacity: 1;
+        }
+
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .blog-title {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            color: var(--text-color);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .blog-content {
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        .blog-content h4 {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin: 40px 0 20px;
+        }
+
+        .blog-content p {
+            margin-bottom: 20px;
+        }
+
+        .blog-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+            padding: 2px 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            background: rgba(var(--accent-color-rgb), 0.1);
+        }
+
+        .blog-content a:hover {
+            background: rgba(var(--accent-color-rgb), 0.2);
+        }
+
+        .comments-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(var(--accent-color-rgb), 0.1);
+        }
+
+        .comments-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .comments-title {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .comment-form {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--text-color);
+            margin-bottom: 15px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .comment-form button {
+            background: #1DA1F2;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(29, 161, 242, 0.3);
+        }
+
+        .comment-form button:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.4);
+        }
+
+        [data-theme="dark"] .comment-form input,
+        [data-theme="dark"] .comment-form textarea {
+            background: rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] .comment-form input,
+        [data-theme="light"] .comment-form textarea {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .comment {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        [data-theme="dark"] .comment {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] .comment {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .comment:hover {
+            transform: translateX(5px);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .comment-action {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-color);
+            opacity: 0.7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .comment-action:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        .comment-action.liked {
+            color: #e74c3c;
+            opacity: 1;
+        }
+
+        .comment-date {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .comment-content {
+            line-height: 1.6;
+        }
+
+        .social-share {
+            display: flex;
+            gap: 15px;
+            margin: 40px 0;
+            justify-content: center;
+        }
+
+        .share-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .share-button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .share-twitter { background: #1DA1F2; }
+        .share-linkedin { background: #0077B5; }
+        .share-facebook { background: #4267B2; }
+
+        .comment-replies {
+            margin-left: 30px;
+            margin-top: 15px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(var(--accent-color-rgb), 0.2);
+        }
+
+        .reply-form {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+        }
+
+        .reply-form.active {
+            display: block;
+        }
+
+        .reply-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--text-color);
+            margin-bottom: 15px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .reply-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .reply-button {
+            padding: 8px 20px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .post-reply {
+            background: #1DA1F2;
+            color: white;
+            border: none;
+        }
+
+        .cancel-reply {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .reply-button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .comment-action.reply-action {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../terminal.html">Terminal</a>
+    </nav>
+
+    <article class="blog-post">
+        <header class="blog-header">
+            <h1 class="blog-title">The Journey of a B.Tech Student: Embracing Challenges and Growth in the Tech World</h1>
+            <div class="blog-meta">
+                <span><i data-lucide="calendar"></i> November 26, 2024</span>
+                <span><i data-lucide="clock"></i> 8 min read</span>
+                <span><i data-lucide="message-square"></i> <span id="commentCount">0</span> Comments</span>
+            </div>
+        </header>
+
+        <div class="blog-content">
+            <p>When I decided to pursue a B.Tech in Computer Science, I had a vision of where I wanted to be—a tech enthusiast eager to decode the mysteries of algorithms, software, and innovation. Little did I know, this journey would be far more than just academic—it would be a holistic development of skills, resilience, and perspective.</p>
+
+            <h4>Starting with Curiosity</h4>
+            <p>The first year of B.Tech felt like diving into an ocean of opportunities and challenges. Subjects like programming, discrete mathematics, and digital logic introduced me to the fundamentals. As exciting as it was, the real challenge lay in adapting to the fast-paced environment. Managing assignments, preparing for exams, and participating in coding contests were all part of the process.</p>
+            
+            <p>It was during this phase that I realized the importance of self-learning. Online platforms like <a href="https://www.geeksforgeeks.org" target="_blank">GeeksforGeeks</a>, <a href="https://leetcode.com" target="_blank">LeetCode</a>, and YouTube tutorials became my best friends. Exploring beyond the syllabus helped me build a strong foundation, and every solved problem gave me a small boost of confidence.</p>
+
+            <h4>Learning Beyond the Classroom</h4>
+            <p>One of the most exciting aspects of a B.Tech journey is the exposure to real-world applications. Internships, hackathons, and group projects bring a flavor of the industry right to the college campus. My participation in a web development internship not only improved my coding skills but also taught me the importance of collaboration and meeting deadlines.</p>
+            
+            <p>Building projects like a Discord bot or a virtual health coach app helped me connect the dots between theoretical concepts and practical implementation. The process of debugging code, integrating APIs, and refining user interfaces often feels like a never-ending challenge, but the sense of accomplishment at the end makes it worthwhile.</p>
+
+            <h4>Tackling Challenges</h4>
+            <p>Like any journey, there are hurdles. Staying consistent amidst tight deadlines, exploring new technologies, and managing mental health during exams can be overwhelming. However, these challenges teach you how to stay disciplined and persevere.</p>
+            
+            <p>One key lesson I've learned is the importance of a growth mindset. Failure is inevitable, whether it's a rejected code submission or a project idea that doesn't work out. But every failure teaches something invaluable—it's part of the process.</p>
+
+            <h4>The Road Ahead</h4>
+            <p>As a second-year student, I know the journey is far from over. The upcoming semesters will bring more specialized subjects, exciting projects, and opportunities to explore areas like artificial intelligence, cloud computing, and cybersecurity.</p>
+            
+            <p>I'm also beginning to explore career paths, from software development to data science, while contributing to open-source projects and sharpening my problem-solving skills through competitive coding.</p>
+
+            <h4>Final Thoughts</h4>
+            <p>A B.Tech journey isn't just about becoming an engineer; it's about becoming a problem-solver, a lifelong learner, and a contributor to the tech ecosystem. If you're a fellow student or someone considering a similar path, embrace the process. Dive into the challenges, celebrate the small wins, and never stop exploring.</p>
+            
+            <p>This journey is what you make of it—let it be your launchpad to innovation, creativity, and growth.</p>
+        </div>
+
+        <div class="social-share">
+            <a href="https://twitter.com/intent/tweet?text=The Journey of a B.Tech Student&url=https://sid1125.github.io/portfolio/blog/btech-journey.html" 
+               target="_blank" class="share-button share-twitter">
+                <i data-lucide="twitter"></i>
+                Tweet
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://sid1125.github.io/portfolio/blog/btech-journey.html&title=The Journey of a B.Tech Student" 
+               target="_blank" class="share-button share-linkedin">
+                <i data-lucide="linkedin"></i>
+                Share
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://sid1125.github.io/portfolio/blog/btech-journey.html" 
+               target="_blank" class="share-button share-facebook">
+                <i data-lucide="facebook"></i>
+                Share
+            </a>
+        </div>
+
+        <section class="comments-section">
+            <h3 class="comments-title">Comments</h3>
+            <div id="disqus_thread"></div>
+        </section>
+    </article>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+
+        var disqus_config = function () {
+            this.page.url = 'https://sid1125.github.io/portfolio/blog/btech-journey.html';
+            this.page.identifier = 'btech-journey';
+        };
+        
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://sidportfolio.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</body>
+</html> 
